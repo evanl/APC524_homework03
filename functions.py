@@ -9,15 +9,9 @@ def ApproximateJacobian(f, x, dx=1e-6):
     fx = f(x)
     Df_x = N.matrix(N.zeros((n,n)))
 
-
-    print "n", n
-
-    print "fx" ,fx
-
     for i in range(n):
         v = N.matrix(N.zeros((n,1)))
         v[i,0] = dx
-        print "v", v 
         Df_x[:,i] = (f(x + v) - fx) / dx
     return Df_x
 
