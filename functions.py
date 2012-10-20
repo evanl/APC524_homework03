@@ -8,7 +8,6 @@ def ApproximateJacobian(f, x, dx=1e-6):
         n = 1
     fx = f(x)
     Df_x = N.matrix(N.zeros((n,n)))
-
     v = N.matrix(N.zeros((n,1)))
     v[:,0] = dx
 
@@ -17,7 +16,7 @@ def ApproximateJacobian(f, x, dx=1e-6):
     print "fx" ,fx
 
     for i in range(n):
-        Df_x[:,i] = (f(x + v) - fx) / v
+        Df_x[:,i] = (f(x + v(i)) - fx) / v(i)
     return Df_x
 
 class Polynomial(object):
