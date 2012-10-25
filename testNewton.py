@@ -20,10 +20,14 @@ class TestNewton(unittest.TestCase):
         self.assertAlmostEqual(x, -1./5.)
 
     def testLinearPolynomial(self):
-        p = F.Polynomial([2,1,6,-15])
+        p = F.Polynomial([1,-6,-19,84])
         solver = newton.Newton(p, tol = 1.e-15, maxiter = 20, dx = 1.e-10)
         x = solver.solve(0.0)
-        self.assertAlmostEqual(x,1.357953822)
+        self.assertAlmostEqual(x,3.)
+        y = solver.solve(-6.0)
+        self.assertAlmostEqual(y,-4)
+        z = solver.solve(6.0)
+        self.assertAlmostEqual(z,7)
 
 if __name__ == "__main__":
     unittest.main()
