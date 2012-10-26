@@ -33,7 +33,7 @@ TEST DESCRIPTIONS:
 
             - Is the given polynomial represented by the function correctly.
 
-        -testMultivariateNonlinear
+        -testMultivariateLinear
 
             - Can the Jacobian approximate a nonlinear multivariate function: 
                 f1 = x1 ^2 + 2 * x2 

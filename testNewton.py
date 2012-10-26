@@ -40,15 +40,28 @@ class TestNewton(unittest.TestCase):
 
         solver = newton.Newton(f, tol = 1.e-10, maxiter = 30) 
         x = solver.solve(N.matrix("0; 1"))
-        print x 
         N.testing.assert_array_almost_equal(x, N.mat("0 ; 0"))
 
     def testAnalyticLinear(self):
         def f(x):
-          return (x - 5.) * 3. 
-        solver = newton.Newton(f , DF = 3.)
+          return (x - 5.) * 3.
+        def g(x):
+          return 3. 
+        solver = newton.Newton(f , DFA = g)
         x = solver.solve(-4.)
         self.assertEqual(x,5.)        
+
+    def testIfAnalytic(self):
+        def f(x):
+          return -5. * (x + 4.)
+        #note that this function is incorrect:   
+        def g(x):
+          return 10. 
+
+        solver = newton.Newton(f, DFA = g)
+        x = solver.solve(5)
+        # if numerical approximation were used, the correct result of x=-4 would be obtained.
+        self.assertTrue(x != -4.)
 
 if __name__ == "__main__":
     unittest.main()
