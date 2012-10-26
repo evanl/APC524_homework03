@@ -7,16 +7,19 @@ import numpy as N
 import functions as F
 
 class Newton(object):
-    def __init__(self, f, tol=1.e-6, maxiter=20, dx=1.e-6, DFA=None ):
+    def __init__(self, f, tol=1.e-6, maxiter=20, dx=1.e-6, DFA=None , r =1.e10 ):
         """Return a new object to find roots of f(x) = 0 using Newton's method.
         tol:     tolerance for iteration (iterate until |f(x)| < tol)
         maxiter: maximum number of iterations to perform
-        dx:      step size for computing approximate Jacobian"""
+        dx:      step size for computing approximate Jacobian
+        DFA:     analytic jacobian if applicable
+        r:       maximum distance away from initial guess"""
         self._f = f
         self._tol = tol
         self._maxiter = maxiter
         self._dx = dx
         self._DFA = DFA
+        self._r = r
 
     def solve(self, x0):
         """Return a root of f(x) = 0, using Newton's method, starting from
@@ -27,6 +30,9 @@ class Newton(object):
             if N.linalg.norm(fx) < self._tol:
                 return x
             x = self.step(x, fx)
+            if N.linalg.norm(x-x0) > self._r:
+                raise Exception('x has exceeded the radius of the initial guess')
+
         return x
 
     def step(self, x, fx=None):

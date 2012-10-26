@@ -31,7 +31,7 @@ class TestFunctions(unittest.TestCase):
         for x in N.linspace(-2,2,11):
             self.assertEqual(p(x), x**2 + 2*x + 3)
 
-    def testMultivariateNonlinear(self):
+    def testMultivariate(self):
         def f(x):
           a = x[0] * (x[0,0] + 2*x[1,0])
           b = 2.* x[1,0] * x[0,0]
@@ -43,7 +43,7 @@ class TestFunctions(unittest.TestCase):
         x0 = N.matrix("1;1")
         Df_x = F.ApproximateJacobian(f,x0)
         self.assertEqual(Df_x.shape,(2,2))
-        jac = N.matrix(" 4 2 ; 2 2 ")
+        jac = N.matrix(" 4 2 ; 2 22 2 ")
         N.testing.assert_array_almost_equal(Df_x,jac)
          
          
