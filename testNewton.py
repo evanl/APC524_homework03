@@ -61,7 +61,17 @@ class TestNewton(unittest.TestCase):
         solver = newton.Newton(f, DFA = g)
         x = solver.solve(5)
         # if numerical approximation were used, the correct result of x=-4 would be obtained.
-        self.assertTrue(x != -4.)
+        self.assertTrue(x != -4.) 
+
+    def testRadiusException(self):
+        # p = (x - 10) * (x + 5) 
+        p = F.Polynomial([1.,-5.,-50.])
+
+        solver = newton.Newton(p, r = 1.)
+
+        with self.assertRaises(Exception):
+            x = solver.solve(0.)
+
 
 if __name__ == "__main__":
     unittest.main()
