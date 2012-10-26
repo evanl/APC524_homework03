@@ -19,7 +19,27 @@ USAGE:
 
 TEST DESCRIPTIONS:
 
-   - testFunctions.py
+    -testFunctions.py
+
+        -testApproxJacobian1
+
+            - can the Jacobian approximate a constant derivative
+
+        -testApproxJacobian2
+
+            - Can the Jacobian function approximate a linear array
+
+        -testPolynomial
+
+            - Is the given polynomial represented by the function correctly.
+
+        -testMultivariateNonlinear
+
+            - Can the Jacobian approximate a nonlinear multivariate function: 
+                f1 = x1 ^2 + 2 * x2 
+                f2 = 2 * x1 * x2
+
+    -testNewton.py
 
         -testLinear
 
@@ -32,3 +52,4 @@ TEST DESCRIPTIONS:
         -testLinearPolynomial
 
             - Tests to see if a linear polynomial solves correctly. 
+                

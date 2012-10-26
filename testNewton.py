@@ -29,5 +29,20 @@ class TestNewton(unittest.TestCase):
         z = solver.solve(6.0)
         self.assertAlmostEqual(z,7)
 
+    def testMultivariate(self):
+        def f(x):
+          a = x[0] * (x[0,0] + 2*x[1,0])
+          b = 2.* x[1,0]
+          val = N.mat(N.zeros((2,1)))
+          val[0,0] = a
+          val[1,0] = b
+          return val
+
+        solver = newton.Newton(f, tol = 1.e-10, maxiter = 30) 
+        x = solver.solve(N.matrix("1; 1"))
+        print x 
+        N.testing.assert_array_almost_equal(x, N.mat("0 ; 0"))
+
+
 if __name__ == "__main__":
     unittest.main()
