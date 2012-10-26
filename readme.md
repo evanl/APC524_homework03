@@ -68,3 +68,11 @@ TEST DESCRIPTIONS:
         -testRadiusException
 
             - tests to see if the limiting radius condition is implemented correctly by choosing a polynomial such that the two possible solution values are outside the radius for the chosen initial guess. 
+        -testIterationLimit
+
+            -tests to see if maximum iteration limit is reached before convergence.
+
+
+- Added functions in functions.py
+
+  - I only took a stab at a linear map since I was running short on time. It is essentially a more compartmentalized version of the test functions used in approxJacobian2. 

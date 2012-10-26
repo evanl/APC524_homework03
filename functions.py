@@ -39,3 +39,18 @@ class Polynomial(object):
     def __call__(self, x):
         return self.f(x)
 
+class LinearMap(object):
+    """ LinearMap takes in a numpy matrix and stores it to be evaluated.
+
+        Example, store a symmetric tensor [10 20 ; 20 30] and use it to map x and y
+ 
+        Example Usage:  A = LinearMap( N.matrix("10 20 ; 20 30"))
+                        y = A(x) # note that x is a 2x1 matrix of values   """
+    def __init__(self, matrix):
+        self._matrix = matrix
+
+    def f(self,x):
+      return self._matrix * x
+      
+    def __call__(self,x):
+        return self.f(x)  

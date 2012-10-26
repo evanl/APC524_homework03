@@ -45,8 +45,7 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(Df_x.shape,(2,2))
         jac = N.matrix(" 4 2 ; 2 2 ")
         N.testing.assert_array_almost_equal(Df_x,jac)
-         
-         
+
 
 
 if __name__ == '__main__':
