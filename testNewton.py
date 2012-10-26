@@ -39,10 +39,16 @@ class TestNewton(unittest.TestCase):
           return val
 
         solver = newton.Newton(f, tol = 1.e-10, maxiter = 30) 
-        x = solver.solve(N.matrix("1; 1"))
+        x = solver.solve(N.matrix("0; 1"))
         print x 
         N.testing.assert_array_almost_equal(x, N.mat("0 ; 0"))
 
+    def testAnalyticLinear(self):
+        def f(x):
+          return (x - 5.) * 3. 
+        solver = newton.Newton(f , DF = 3.)
+        x = solver.solve(-4.)
+        self.assertEqual(x,5.)        
 
 if __name__ == "__main__":
     unittest.main()
