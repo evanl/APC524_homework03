@@ -32,6 +32,8 @@ class Newton(object):
             x = self.step(x, fx)
             if N.linalg.norm(x-x0) > self._r:
                 raise Exception('x has exceeded the radius of the initial guess')
+        if N.linalg.norm(fx) > self._tol:
+            raise Exception('Solution does not converge for this number of iterations')
 
         return x
 

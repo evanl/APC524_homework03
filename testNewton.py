@@ -8,14 +8,14 @@ import functions as F
 class TestNewton(unittest.TestCase):
     def testLinear(self):
         f = lambda x : 3.0 * x + 6.0
-        solver = newton.Newton(f, tol=1.e-15, maxiter=2)
+        solver = newton.Newton(f, tol=1.e-15, maxiter=20)
         x = solver.solve(2.0)
         self.assertEqual(x, -2.0)
 
     def testSingleStep(self):
         def f(x):
           return 4.0 * x + N.exp(x)
-        solver = newton.Newton(f, tol = 1.e-15, maxiter=1, dx = 1.e-10) 
+        solver = newton.Newton(f, tol = 1., maxiter=1, dx = 1.e-10) 
         x = solver.solve(0.0)
         self.assertAlmostEqual(x, -1./5.)
 
@@ -58,10 +58,10 @@ class TestNewton(unittest.TestCase):
         def g(x):
           return 10. 
 
-        solver = newton.Newton(f, DFA = g)
-        x = solver.solve(5)
-        # if numerical approximation were used, the correct result of x=-4 would be obtained.
-        self.assertTrue(x != -4.) 
+        solver = newton.Newton(f, maxiter= 30 , DFA = g)
+        # new condition takes advantage of non-convergence
+        with self.assertRaises(Exception):
+            x = solver.solve(5)
 
     def testRadiusException(self):
         # p = (x - 10) * (x + 5) 
@@ -71,6 +71,14 @@ class TestNewton(unittest.TestCase):
 
         with self.assertRaises(Exception):
             x = solver.solve(0.)
+
+    def testIterationLimit(self):
+        p = F.Polynomial([1,-5,-50])
+
+        solver = newton.Newton(p, tol = 1.e-15, maxiter=2)
+
+        with self.assertRaises(Exception):
+            x = solver.solve(1000.)
 
 
 if __name__ == "__main__":
